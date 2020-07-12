@@ -1,6 +1,12 @@
 const express = require('express')
+const config = require('./config')
 const app = express()
 
-const server = app.listen(8000, () => {
-    console.log(`Listening hhttp://localhost:${server.address().port}`)
+const testRoutes = require('./routes/test');
+app.use(express.json())
+testRoutes(app)
+
+app.listen(config.port, () => {
+  // eslint-disable-next-line no-console
+  console.log(`Listening hhttp://localhost:${config.port}`)
 })
