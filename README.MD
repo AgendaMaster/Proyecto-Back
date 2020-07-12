@@ -9,7 +9,7 @@ Run to install all the dependencies of de app
 
 ### `npm install`
 
-### Create the .env file
+### `Create the .env file`
 
 ## ▶️ Available Scripts
 
