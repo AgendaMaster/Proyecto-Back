@@ -7,9 +7,20 @@
     "lib": "lib"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "@hapi/boom": "^9.1.0",
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
