@@ -9,6 +9,8 @@ Run to install all the dependencies of de app
 
 ### `npm install`
 
+### Create the .env file
+
 ## ▶️ Available Scripts
 
 In the project directory, you can run:
