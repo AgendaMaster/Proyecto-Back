@@ -3,6 +3,12 @@ Proyecto grupal por parte del Cohort 3 - Team Diego Maury del programa Platzi Ma
 
 ![status](https://img.shields.io/badge/STATUS-In%20Progress-yellow)
 
+## ▶️ Prepare the project
+
+Run to install all the dependencies of de app
+
+### `npm install`
+
 ## ▶️ Available Scripts
 
 In the project directory, you can run:
