@@ -1,12 +1,14 @@
 const express = require('express')
-const config = require('./config')
 const app = express()
 
-const testRoutes = require('./routes/test');
+const config = require('./config')
+const users = require('./routes/users.js');
+
 app.use(express.json())
-testRoutes(app)
+
+users(app)
 
 app.listen(config.port, () => {
   // eslint-disable-next-line no-console
-  console.log(`Listening hhttp://localhost:${config.port}`)
+  console.log(`Listening http://localhost:${config.port}`)
 })
