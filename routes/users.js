@@ -1,5 +1,7 @@
 const express = require('express');
 const UsersService = require('../services/users');
+const validationHandler = require('../utils/middleware/validationHandler');
+const { userSchema } = require('../utils/schemas/users');
 
 function usersApi(app) {
   const router = express.Router();
@@ -33,7 +35,7 @@ function usersApi(app) {
     }
   });
 
-  router.post('/', async function (req, res, next) {
+  router.post('/', validationHandler(userSchema), async function (req, res, next) {
     const { body: user } = req;
     try {
       const createUserId = await usersService.createUser({ user });
@@ -46,7 +48,7 @@ function usersApi(app) {
     }
   });
 
-  router.put('/:userId', async function (req, res, next) {
+  router.put('/:userId', validationHandler(userSchema), async function (req, res, next) {
     const { userId } = req.params;
     const { body: user } = req;
     try {

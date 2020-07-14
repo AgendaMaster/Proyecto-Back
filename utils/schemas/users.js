@@ -1,35 +1,24 @@
-const joi = require('@hapi/joi');
+const joi = require('@hapi/joi')
 
-const userIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
-const userFirstNameSchema = joi.string().max(80);
-const userLastNameSchema = joi.string().max(80);
-const userEmailSchema = joi.string().regex(/^(http[s]?:\/\/)?([^\/\s]+\/)(.*)$/);
-const userDescriptionSchema = joi.string().max(300);
-const userPasswordSchema = joi.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})$/);
-const userTagsSchema = joi.array().items(joi.string().max(50));
+const mongoIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/)
+const userNameSchema = joi.string().max(120)
+// eslint-disable-next-line no-useless-escape
+const userEmailSchema = joi.string().regex(/^[\w\._]{5,30}(\+[\w]{0,10})?@[\w\.\-]{3,}?\.\w{2,5}$/)
+const userDirectionSchema = joi.string().max(300)
+const userPasswordSchema = joi.string().regex(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,}$/)
+const userPhoneSchema = joi.string().regex(/^\*?\d{2,3}[^\da-z]?\d{2,3}[^\da-z]?\d{2,3}{#pe}?\d*$/)
 
-const createUserSchema = {
-  firstName: userFirstNameSchema.required(),
-  lastName: userLastNameSchema.required(),
+const userSchema = {
+  name: userNameSchema.required(),
+  phone: userPhoneSchema.required(),
+  direction: userDirectionSchema.required(),
   email: userEmailSchema.required(),
-  description: userDescriptionSchema.required(),
-  duration: userDurationSchema.required(),
   password: userPasswordSchema.required(),
-  tags: userTagsSchema
-};
-
-const updateUserSchema = {
-  firstName: userFirstNameSchema.required(),
-  lastName: userLastNameSchema.required(),
-  email: userEmailSchema.required(),
-  description: userDescriptionSchema.required(),
-  duration: userDurationSchema.required(),
-  password: userPasswordSchema.required(),
-  tags: userTagsSchema
+  profileId: mongoIdSchema.required(),
+  companyId: mongoIdSchema
 };
 
 module.exports = {
-  userIdSchema,
-  createUserSchema,
-  updateUserSchema
+  mongoIdSchema,
+  userSchema
 };
