@@ -2,9 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const UsersService = require('../services/users');
 const validationHandler = require('../utils/middleware/validationHandler');
-const { userSchema } = require('../utils/schemas/users');
+const { userSchema } = require('../schemas/users');
 require("../utils/auth/strategies/jwt");
-
 
 function usersApi(app) {
   const router = express.Router();
