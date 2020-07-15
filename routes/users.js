@@ -1,7 +1,10 @@
 const express = require('express');
+const passport = require('passport');
 const UsersService = require('../services/users');
 const validationHandler = require('../utils/middleware/validationHandler');
 const { userSchema } = require('../utils/schemas/users');
+require("../utils/auth/strategies/jwt");
+
 
 function usersApi(app) {
   const router = express.Router();
@@ -9,7 +12,9 @@ function usersApi(app) {
 
   const usersService = new UsersService();
 
-  router.get('/', async function (req, res, next) {
+  router.get('/',
+              passport.authenticate("jwt", {session:false}),
+              async function (req, res, next) {
     const { tags } = req.query;
     try {
       const users = await usersService.getUsers({ tags });
@@ -22,7 +27,7 @@ function usersApi(app) {
     }
   });
 
-  /*router.get('/:userId', 'params', async function (req, res, next) {
+  router.get('/:userId', async function (req, res, next) {
     const { userId } = req.params;
     try {
       const user = await usersService.getUser({ userId });
@@ -33,7 +38,7 @@ function usersApi(app) {
     } catch (err) {
       next(err);
     }
-  });*/
+  });
 
   router.post('/', validationHandler(userSchema), async function (req, res, next) {
     const { body: user } = req;
@@ -48,7 +53,9 @@ function usersApi(app) {
     }
   });
 
-  router.put('/:userId', validationHandler(userSchema), async function (req, res, next) {
+  router.put('/:userId',
+              passport.authenticate("jwt", {session:false}),
+              validationHandler(userSchema), async function (req, res, next) {
     const { userId } = req.params;
     const { body: user } = req;
     try {
@@ -62,7 +69,9 @@ function usersApi(app) {
     }
   });
 
-  router.delete('/:userId', async function (req, res, next) {
+  router.delete('/:userId',
+              passport.authenticate("jwt", {session:false}),
+              async function (req, res, next) {
     const { userId } = req.params;
     try {
       const deleteUserId = await usersService.deleteUser({ userId });
