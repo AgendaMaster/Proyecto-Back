@@ -22,7 +22,7 @@ function usersApi(app) {
     }
   });
 
-  router.get('/:userId', 'params', async function (req, res, next) {
+  /*router.get('/:userId', 'params', async function (req, res, next) {
     const { userId } = req.params;
     try {
       const user = await usersService.getUser({ userId });
@@ -33,7 +33,7 @@ function usersApi(app) {
     } catch (err) {
       next(err);
     }
-  });
+  });*/
 
   router.post('/', validationHandler(userSchema), async function (req, res, next) {
     const { body: user } = req;
