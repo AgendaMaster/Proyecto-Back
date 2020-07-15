@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
-
-const config = require('./config')
+const { config } = require('./config')
 const users = require('./routes/users.js');
+const authApiRouter = require('./routes/auth');
+
 
 app.use(express.json())
 
-users(app)
+users(app);
+app.use("/api/auth", authApiRouter);
 
 app.listen(config.port, () => {
   // eslint-disable-next-line no-console
