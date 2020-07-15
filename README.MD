@@ -20,5 +20,15 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
+### `npm run dev`
+
+Create AdminUser - test Token JWT
+
+```
+node script/seed_admin.js
+```
+
+
 ## 👥Contributors
 - [Santiago Duque](https://twitter.com/sd8956)
+- [Andres Carrion](https://twitter.com/freehyoga)
