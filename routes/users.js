@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const UsersService = require('../services/users');
 const validationHandler = require('../utils/middleware/validationHandler');
-const { userSchema } = require('../schemas/users');
+const { userSchema, userCompanySchema } = require('../schemas/users');
 require("../utils/auth/strategies/jwt");
 
 function usersApi(app) {
@@ -39,8 +39,23 @@ function usersApi(app) {
     }
   });
 
-  router.post('/', validationHandler(userSchema), async function (req, res, next) {
+  router.post('/', async function (req, res, next) {
     const { body: user } = req;
+    let result = null
+
+    if (user.isCompany) {
+      result = userCompanySchema.validate(user)
+    } else {
+      result = userSchema.validate(user)
+    }
+
+    if (result.error) {
+      res.status(400).json({
+        data: null,
+        message: result.error.details[0].message,
+      })
+    }
+
     try {
       const createUserId = await usersService.createUser({ user });
       res.status(201).json({
