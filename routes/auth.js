@@ -12,8 +12,6 @@ require("../utils/auth/strategies/basic");
 api.post("/token", async function(req, res, next) {
   passport.authenticate("basic", function(error, user) {
     try {
-      console.log("inicio auth")
-      console.log(user)
       if (error || !user) {
         next(boom.unauthorized());
       }
