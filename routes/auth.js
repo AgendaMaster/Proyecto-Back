@@ -20,7 +20,7 @@ api.post("/token", async function(req, res, next) {
         if (error) {
           next(error);
         }
-
+        
         const payload = { sub: user.email, email: user.email };
         const token = jwt.sign(payload, config.authJwtSecret, {
           expiresIn: "30m"

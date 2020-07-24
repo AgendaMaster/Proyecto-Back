@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const UsersService = require('../services/users');
-const { userSchema, userCompanySchema } = require('../schemas/users');
+const { userSchema, updateUserSchema, userCompanySchema, updateUserCompanySchema } = require('../schemas/users');
 require("../utils/auth/strategies/jwt");
 
 function usersApi(app) {
@@ -80,9 +80,9 @@ function usersApi(app) {
     let result = null
 
     if (user.isCompany) {
-      result = userCompanySchema.validate(user)
+      result = updateUserCompanySchema.validate(user)
     } else {
-      result = userSchema.validate(user)
+      result = updateUserSchema.validate(user)
     }
 
     if (result.error) {

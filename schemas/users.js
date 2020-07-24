@@ -24,6 +24,18 @@ const userSchema = joi.object({
   isCompany: isCompanySchema.required()
 });
 
+const updateUserSchema = joi.object({
+  firstName: userNameSchema.required(),
+  lastName: userNameSchema.required(),
+  email: userEmailSchema.required(),
+  description: descriptionSchema,
+  country: countrySchema,
+  website: websiteSchema,
+  profileId: mongoIdSchema,
+  companyId: mongoIdSchema,
+  isCompany: isCompanySchema.required()
+});
+
 const userCompanySchema = joi.object({
   name: userNameSchema.required(),
   email: userEmailSchema.required(),
@@ -36,8 +48,21 @@ const userCompanySchema = joi.object({
   isCompany: isCompanySchema.required()
 });
 
+const updateUserCompanySchema = joi.object({
+  name: userNameSchema.required(),
+  email: userEmailSchema.required(),
+  description: descriptionSchema,
+  country: countrySchema,
+  website: websiteSchema,
+  profileId: mongoIdSchema,
+  companyId: mongoIdSchema,
+  isCompany: isCompanySchema.required()
+});
+
 module.exports = {
   mongoIdSchema,
   userSchema,
-  userCompanySchema
+  updateUserSchema,
+  userCompanySchema,
+  updateUserCompanySchema
 };
