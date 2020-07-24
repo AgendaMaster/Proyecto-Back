@@ -12,6 +12,8 @@ require("../utils/auth/strategies/basic");
 api.post("/token", async function(req, res, next) {
   passport.authenticate("basic", function(error, user) {
     try {
+      console.log("inicio auth")
+      console.log(user)
       if (error || !user) {
         next(boom.unauthorized());
       }
@@ -21,7 +23,7 @@ api.post("/token", async function(req, res, next) {
           next(error);
         }
 
-        const payload = { sub: user.username, email: user.email };
+        const payload = { sub: user.email, email: user.email };
         const token = jwt.sign(payload, config.authJwtSecret, {
           expiresIn: "30m"
         });

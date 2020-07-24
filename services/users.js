@@ -19,15 +19,23 @@ class UsersService {
   }
 
   async createUser({ user }) {
-    const passdw = user.password
-    const hashPass = bcrypt.hash(passdw, 10)
-    user.password = hashPass
-    
-    const createUserId = await this.mongoDB.create(this.collection, user)
-    return createUserId
+    await this.createEmailIndex()
+
+    try {
+      const passdw = user.password
+      const hashPass = await bcrypt.hash(passdw, 10)
+      user.password = hashPass
+      
+      const createUserId = await this.mongoDB.create(this.collection, user)
+      return createUserId
+    } catch (error) {
+      return false
+    }
   }
 
   async updateUser({ userId, user } = {}) {
+    await this.createEmailIndex()
+
     const updatedUserId = await this.mongoDB.update(
       this.collection,
       userId,
@@ -39,6 +47,10 @@ class UsersService {
   async deleteUser({ userId }) {
     const deletedUserId = await this.mongoDB.delete(this.collection, userId)
     return deletedUserId
+  }
+
+  async createEmailIndex() {
+    await this.mongoDB.createIndex(this.collection, { "email": 1 })
   }
 }
 
