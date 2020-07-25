@@ -27,10 +27,17 @@ Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 Create AdminUser - test Token JWT
 
 ```
-node script/seed_admin.js
+node scripts/seed_admin.js
+```
+
+Create AdminUser - test Token JWT
+
+```
+node scripts/roles_admin.js
 ```
 
 
 ## 👥Contributors
 - [Santiago Duque](https://twitter.com/sd8956)
 - [Andres Carrion](https://twitter.com/freehyoga)
+- [Heyner Javier Marmol](https://twitter.com/freehyoga)
