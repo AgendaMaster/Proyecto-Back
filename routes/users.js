@@ -1,8 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const UsersService = require('../services/users');
-const validationHandler = require('../utils/middleware/validationHandler');
-const { userSchema } = require('../schemas/users');
+const { userSchema, updateUserSchema, userCompanySchema, updateUserCompanySchema } = require('../schemas/users');
 require("../utils/auth/strategies/jwt");
 
 function usersApi(app) {
@@ -39,13 +38,34 @@ function usersApi(app) {
     }
   });
 
-  router.post('/', validationHandler(userSchema), async function (req, res, next) {
+  router.post('/', async function (req, res, next) {
     const { body: user } = req;
+    let result = null
+
+    if (user.isCompany) {
+      result = userCompanySchema.validate(user)
+    } else {
+      result = userSchema.validate(user)
+    }
+
+    if (result.error) {
+      res.status(400).json({
+        data: null,
+        message: result.error.details[0].message,
+      })
+    }
+
     try {
       const createUserId = await usersService.createUser({ user });
+      let message = 'user created'
+
+      if(!createUserId) {
+        message = 'Duplicated email'
+      }
+
       res.status(201).json({
         data: createUserId,
-        message: 'user created',
+        message,
       });
     } catch (err) {
       next(err);
@@ -54,9 +74,24 @@ function usersApi(app) {
 
   router.put('/:userId',
               passport.authenticate("jwt", {session:false}),
-              validationHandler(userSchema), async function (req, res, next) {
+              async function (req, res, next) {
     const { userId } = req.params;
     const { body: user } = req;
+    let result = null
+
+    if (user.isCompany) {
+      result = updateUserCompanySchema.validate(user)
+    } else {
+      result = updateUserSchema.validate(user)
+    }
+
+    if (result.error) {
+      res.status(400).json({
+        data: null,
+        message: result.error.details[0].message,
+      })
+    }
+
     try {
       const updateUserId = await usersService.updateUser({ userId, user });
       res.status(200).json({
