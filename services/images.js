@@ -1,12 +1,18 @@
+const MongoLib = require('../lib/mongo');
+
+
 const aws = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const path = require( 'path' );
 const s3 = new aws.S3();
+const { config } = require('./../config/index');
 
+const collection = 'Images'
+const mongoDB = new MongoLib();
 aws.config.update({
-  secretAccessKey: 'n96MC7iG0Tfvmn3OmFnNayoUD0YaK3BVK42CVRZL',
-  accessKeyId: 'AKIAJIITIH6IVPEMHWLQ',
+  secretAccessKey: config.secretAccessKey,
+  accessKeyId: config.accessKeyId,
   Bucket: 'agendamaster'
 });
 
@@ -24,4 +30,24 @@ const upload = multer({
   }),
 });
 
-module.exports = upload;
+async function createImage(imagePath) {
+    const createImageId = await mongoDB.create(collection, imagePath);
+    return createImageId;
+} 
+
+async function getImages(){
+    const images = await mongoDB.getAll(collection);
+    return images || [];
+}
+
+async function getImage({ imageId }) {
+    const user = await mongoDB.get(collection, imageId);
+    return user || {};
+  }
+
+module.exports ={ 
+    upload, 
+    createImage, 
+    getImages,
+    getImage
+};

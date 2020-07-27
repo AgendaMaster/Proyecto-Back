@@ -1,7 +1,9 @@
 const express = require('express');
 
-const upload = require("../services/images");
+const { upload } = require("../services/images");
 const singleUpload = upload.single("image");
+const ImageService = require("../services/images");
+
 const validationHandler = require('../utils/middleware/validationHandler');
 
 require("../utils/auth/strategies/jwt");
@@ -11,24 +13,55 @@ function imagesApi(app) {
     const router = express.Router();
     app.use('/api/images', router);
 
-    router.post("/", function (req, res) {
-        singleUpload(req, res, function (err) {
-          if (err) {
-            return res.json({
-              success: false,
-              errors: {
-                title: "Image Upload Error",
-                detail: err.message,
-                error: err,
-              },
+    router.get("/", async function(req, res, next){
+        try {
+            const images = await ImageService.getImages();
+            res.status(200).json({
+                data: images,
+                message: 'Images listed',
             });
-          }
-          let update = { profilePicture: req.file.location };
-          res.status(201).json({
-              message: update
-          })
-        });
-      });
+            } catch (err) {
+            next(err);
+        }
+    });
+
+    router.get("/:imageId", async function(req, res, next){
+        const { imageId } = req.params;
+        try {
+          const image = await ImageService.getImage({ imageId });
+          res.status(200).json({
+            data: image,
+            message: 'image retrieved',
+          });
+        } catch (err) {
+          next(err);
+        }
+    });
+
+    router.post("/", function (req, res, next) {
+        try {
+            singleUpload(req, res, async function (err) {
+                if (err) {
+                  return res.json({
+                    success: false,
+                    errors: {
+                      title: "Image Upload Error",
+                      detail: err.message,
+                      error: err,
+                    },
+                  });
+                }
+                let imagePath = { profilePicture: req.file.location };
+                const createImageId = await ImageService.createImage( imagePath );
+                res.status(201).json({
+                    data: createImageId,
+                    message: 'image created',
+                });
+              });
+        } catch (error) {
+            next(error)
+        }
+    });
  
 }
 

@@ -11,6 +11,8 @@ const config = {
   authAdminPassword: process.env.AUTH_ADMIN_PASSWORD,
   authAdminEmail: process.env.AUTH_ADMIN_EMAIL,
   authJwtSecret: process.env.AUTH_JWT_SECRET,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  accessKeyId: process.env.ACCESS_KEY_ID,
 }
 
 module.exports = { config };
