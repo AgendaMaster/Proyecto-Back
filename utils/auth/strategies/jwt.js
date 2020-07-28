@@ -15,7 +15,7 @@ passport.use(
 
       try {
         const [user] = await mongoDB.getAll("users", {
-          username: tokenPayload.sub
+          email: tokenPayload.email
         });
 
         if (!user) {

@@ -35,9 +35,12 @@ Create AdminUser - test Token JWT
 ```
 node scripts/roles_admin.js
 ```
+## 📑 API Documentation
 
+[Agenda Master](https://documenter.getpostman.com/view/8893124/T1Dqgc45?version=latest)
 
 ## 👥Contributors
 - [Santiago Duque](https://twitter.com/sd8956)
 - [Andres Carrion](https://twitter.com/freehyoga)
 - [Heyner Javier Marmol](https://twitter.com/freehyoga)
+- [Gabriel Zárate Tovar](https://twitter.com/gzaratet)
