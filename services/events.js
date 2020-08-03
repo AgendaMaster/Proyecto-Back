@@ -36,6 +36,12 @@ class EventsService {
     const deletedEventId = await this.mongoDB.delete(this.collection, eventId)
     return deletedEventId
   }
+
+  async getSuggestions() {
+    const query =  { relevance: 0 }
+    const suggestions = await this.mongoDB.getLimit(this.collection, 5, query)
+    return suggestions
+  }
 }
 
 module.exports = EventsService
