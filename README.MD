@@ -35,7 +35,7 @@ node scripts/roles_admin.js
 ```
 ## 📑 API Documentation
 
-[Agenda Master](https://documenter.getpostman.com/view/8893124/T1Dqgc45?version=latest)
+[Agenda Master](https://documenter.getpostman.com/view/8893124/T1Dv8ugf)
 
 ## 👥Contributors
 - [Santiago Duque](https://twitter.com/sd8956)
