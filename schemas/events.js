@@ -12,6 +12,7 @@ const eventEndDateSchema = joi
 const eventRelevanceSchema = joi.number().integer();
 const eventAvatarSchema = joi
   .string()
+  // eslint-disable-next-line no-useless-escape
   .regex(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/);
 const eventColorSchema = joi.string().regex(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/);
 
