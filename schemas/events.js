@@ -10,6 +10,7 @@ const eventEndDateSchema = joi
   .string()
   .regex(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]$/);
 const eventRelevanceSchema = joi.number().integer();
+const eventLimitSchema = joi.number().integer();
 const eventAvatarSchema = joi
   .string()
   // eslint-disable-next-line no-useless-escape
@@ -21,8 +22,8 @@ const eventSchema = joi.object({
   startDate: eventStartDateSchema.required(),
   endDate: eventEndDateSchema.required(),
   relevance: eventRelevanceSchema.required(),
+  limit: eventLimitSchema.required(),
   avatar: eventAvatarSchema,
-  profileId: mongoIdSchema.required(),
   bckColor: eventColorSchema.required(),
   borderColor: eventColorSchema,
 });
@@ -33,7 +34,6 @@ const updateEventSchema = joi.object({
   endDate: eventEndDateSchema.required(),
   relevance: eventRelevanceSchema.required(),
   avatar: eventAvatarSchema,
-  profileId: mongoIdSchema.required(),
   bckColor: eventColorSchema,
   borderColor: eventColorSchema,
 });
