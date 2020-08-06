@@ -1,4 +1,5 @@
 const MongoLib = require('../lib/mongo')
+const { ObjectID } = require('mongodb')
 
 class EventsService {
   constructor() {
@@ -41,6 +42,12 @@ class EventsService {
     const query =  { relevance: 0 }
     const suggestions = await this.mongoDB.getLimit(this.collection, 5, query)
     return suggestions
+  }
+
+  async getEventsByUser({ userId }) {
+    const query = { 'users._id': ObjectID(userId) }
+    const events = await this.mongoDB.getAll(this.collection, query)
+    return events
   }
 }
 
