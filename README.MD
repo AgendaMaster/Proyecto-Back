@@ -20,8 +20,6 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
-### `npm run dev`
-
 ## ▶️ Script JWT
 
 Create AdminUser - test Token JWT
@@ -37,7 +35,7 @@ node scripts/roles_admin.js
 ```
 ## 📑 API Documentation
 
-[Agenda Master](https://documenter.getpostman.com/view/8893124/T1Dqgc45?version=latest)
+[Agenda Master](https://documenter.getpostman.com/view/8893124/T1Dv8ugf)
 
 ## 👥Contributors
 - [Santiago Duque](https://twitter.com/sd8956)
