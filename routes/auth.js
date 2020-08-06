@@ -25,6 +25,14 @@ api.post("/token", async function(req, res, next) {
           next(error);
         }
         
+        if (!user) {
+          return res.status(400).json(
+            { 
+              "error": "Incorrect credencials"
+            }
+          );
+        }
+
         const payload = { sub: user._id, email: user.email };
         const token = jwt.sign(payload, config.authJwtSecret, {
           expiresIn: "30m"
