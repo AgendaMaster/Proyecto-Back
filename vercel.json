@@ -1,5 +1,4 @@
 {
-  "name": "agenda-master-api",
   "version": 2,
   "builds": [{ "src": "index.js", "use": "@now/node"}],
   "routes": [{ "src": "/(.*)", "dest": "/index.js" }],
@@ -8,6 +7,7 @@
     "DB_USER": "@agenda-db-user",
     "DB_NAME": "@agenda-db-name",
     "DB_HOST": "@agenda-db-host",
+    "CORS": "*",
     "AUTH_ADMIN_USERNAME": "@agenda-auth-user",
     "AUTH_ADMIN_PASSWORD": "@agenda-auth-pass",
     "AUTH_ADMIN_EMAIL": "@agenda-auth-email",
