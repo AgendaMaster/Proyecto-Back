@@ -24,6 +24,11 @@ const userSchema = joi.object({
   isCompany: isCompanySchema.required()
 });
 
+const userSubscribeSchema = joi.object({
+  email: userEmailSchema.required(),
+  userId: mongoIdSchema,
+});
+
 const updateUserSchema = joi.object({
   firstName: userNameSchema.required(),
   lastName: userNameSchema.required(),
@@ -62,6 +67,7 @@ const updateUserCompanySchema = joi.object({
 module.exports = {
   mongoIdSchema,
   userSchema,
+  userSubscribeSchema,
   updateUserSchema,
   userCompanySchema,
   updateUserCompanySchema
